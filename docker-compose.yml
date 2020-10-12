@@ -1,0 +1,29 @@
+version: '3'
+services:
+  osm2pgsql:
+    build:
+      context: osm2pgsql/
+    command: bash -c "sleep 5; /usr/local/bin/osm-importer.sh"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      PG_PORT_5432_TCP_ADDR: postgres
+      PG_PORT_5432_TCP_PORT: 5432
+      PG_ENV_POSTGRES_DB: docker
+      PG_ENV_POSTGRES_USER: docker
+      PG_ENV_POSTGRES_PASSWORD: docker
+      REGION: north-america/us/new-york
+      LOOP: 0
+    restart: on-failure:5
+
+  postgres:
+    image: postgis/postgis
+    ports:
+      - "0.0.0.0:5432:5432"
+    environment:
+      ALLOW_IP_RANGE: "0.0.0.0/0"
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      PG_PORT: 5432
