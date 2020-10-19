@@ -40,5 +40,6 @@ RUN apt-get install -y osmctools=${OSMCTOOLS_VERSION} postgresql-client-10 \
 
 # osm replication script
 ADD ./osm-importer.sh /usr/local/bin/osm-importer.sh
+ADD ./custom.style /user/local/bin/custom.style
 WORKDIR /osm
 CMD ["/bin/bash", "-i", "/usr/local/bin/osm-importer.sh"]

@@ -35,6 +35,11 @@ function importosm () {
         -U $PG_ENV_POSTGRES_USER $PG_ENV_POSTGRES_DB \
     || return $?
 
+    echo "CREATE EXTENSION hstore;" | PGPASSWORD=$PG_ENV_POSTGRES_PASSWORD \
+        psql --no-password \
+        -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_PORT \
+        -U $PG_ENV_POSTGRES_USER $PG_ENV_POSTGRES_DB \
+
     UPDATEPBF=$(mktemp -p $DATADIR XXX.pbf)
     if [ ! -f ${PBF} ] ; then
         wget -O "${UPDATEPBF}" http://$HOST/${REGION}-latest.osm.pbf \
@@ -45,7 +50,11 @@ function importosm () {
     fi
     trap "Importing in progress, ignored SIGINT & SIGTERM." SIGINT SIGTERM
     PGPASSWORD=$PG_ENV_POSTGRES_PASSWORD \
-        osm2pgsql --create --slim --cache 2000 \
+        osm2pgsql -k \
+        --create \
+        --slim \
+        --cache 2000 \
+        --style /user/local/bin/custom.style \
         --host $PG_PORT_5432_TCP_ADDR \
         --database $PG_ENV_POSTGRES_DB \
         --username $PG_ENV_POSTGRES_USER \
