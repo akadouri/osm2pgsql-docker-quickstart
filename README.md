@@ -5,7 +5,7 @@ This is a simple docker-compose.yml setup using [osm2pgsql](https://github.com/o
 # Credit
 This project started with a fork from [OsmHackTW/osm2pgsql-docker](https://github.com/OsmHackTW/osm2pgsql-docker) and the version is bumped to 1.3.0. The license from that project is available in this project under osm2pgsql/LICENSE.
 
-After some time I realized osm2pgsql is already packaged... so now this container uses `debian:bookworm-slim` and `osm2pgsql=1.7.0`!
+At SOTM2022 I learned osm2pgsql is already packaged... so now this container uses `debian:bookworm-slim` and `osm2pgsql=1.7.0`!
 
 # Usage
 
