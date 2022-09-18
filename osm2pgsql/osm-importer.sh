@@ -47,13 +47,14 @@ function importosm () {
     else
         osmupdate -v --base-url=$HOST/${REGION}-updates "$PBF" "$UPDATEPBF" \
             || return $?
-    fi
+    fi 
     trap "Importing in progress, ignored SIGINT & SIGTERM." SIGINT SIGTERM
     PGPASSWORD=$PG_ENV_POSTGRES_PASSWORD \
         osm2pgsql -k \
         --create \
         --slim \
         --cache 2000 \
+        --extra-attributes \
         --style /user/local/bin/custom.style \
         --host $PG_PORT_5432_TCP_ADDR \
         --database $PG_ENV_POSTGRES_DB \
