@@ -1,4 +1,6 @@
 #!/bin/bash
+# Updated author: Ariel Kadouri
+# Original author: Rex Tsai <rex.cc.tsai@gmail.com> https://github.com/OsmHackTW/osm2pgsql-docker
 
 export PGPASSWORD=$PG_ENV_POSTGRES_PASSWORD
 echo DATADIR=${DATADIR:="/osm/data"}
