@@ -14,12 +14,37 @@ services:
       PG_ENV_POSTGRES_DB: docker
       PG_ENV_POSTGRES_USER: docker
       PG_ENV_POSTGRES_PASSWORD: docker
-      REGION: north-america/us/new-york
-      LOOP: 0
-    restart: on-failure:5
+      REGION: north-america/us/delaware
+    restart: on-failure:2
+    # volumes:
+    # Specify local directory with .pbf file
+    # - /your/local/path:/osm/data
 
   postgres:
     image: postgis/postgis
+    command:
+      # See https://osm2pgsql.org/doc/manual.html#tuning-the-postgresql-server
+      - "postgres"
+      - "-c"
+      - "shared_buffers=1GB"
+      - "-c"
+      - "work_mem=50MB"
+      - "-c"
+      - "maintenance_work_mem=4GB"
+      - "-c"
+      - "autovacuum_work_mem=1GB"
+      - "-c"
+      - "wal_level=minimal"
+      - "-c"
+      - "checkpoint_timeout=60min"
+      - "-c"
+      - "max_wal_size=4GB"
+      - "-c"
+      - "checkpoint_completion_target=0.9"
+      - "-c"
+      - "max_wal_senders=0"
+      - "-c"
+      - "random_page_cost=1.0"
     ports:
       - "0.0.0.0:5432:5432"
     environment:
@@ -27,3 +52,7 @@ services:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       PG_PORT: 5432
+
+# volumes:
+#   localvol:
+#     external: true
