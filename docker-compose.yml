@@ -16,9 +16,9 @@ services:
       PG_ENV_POSTGRES_PASSWORD: docker
       REGION: north-america/us/delaware
     restart: on-failure:2
-    # volumes:
-    # Specify local directory with .pbf file
-    # - /your/local/path:/osm/data
+    volumes:
+      # Specify local directory with .pbf file
+      - /your/local/path:/osm/data
 
   postgres:
     image: postgis/postgis
