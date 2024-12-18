@@ -3,10 +3,11 @@
 This is a simple docker-compose.yml setup using [osm2pgsql](https://github.com/openstreetmap/osm2pgsql) with [postgis](http://postgis.net/). It is not well tuned, please read the [osm2pgsql manual](https://osm2pgsql.org/doc/manual.html) for more information on how to best use osm2pgsql.
 
 # Credit
-This project started with a fork from [OsmHackTW/osm2pgsql-docker](https://github.com/OsmHackTW/osm2pgsql-docker) and the version is bumped to 1.3.0.
+
+This project started with a fork from [OsmHackTW/osm2pgsql-docker](https://github.com/OsmHackTW/osm2pgsql-docker).
 
 At SOTM2022 I learned osm2pgsql is already packaged... so now this container
-uses `debian:bookworm-slim` and `apt-get install -y osm2pgsql`!
+uses `debian:bookworm-backports` and `apt-get install -y osm2pgsql/bookworm-backports`!
 
 # Usage
 
@@ -26,5 +27,6 @@ extract (from geofabrik or elsewhere), you can specify the pbf directory in unde
 After the file is loaded into the postgis database, you can connect to it locally with the connection information found in docker-compose.yml
 
 ## Updating
-You can update the database by re-running the osm2pgsql docker container, it will use 
+
+You can update the database by re-running the osm2pgsql docker container, it will use
 `osm2pgsql-replication` to update the existing database.

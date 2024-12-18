@@ -7,7 +7,7 @@ echo DATADIR=${DATADIR:="/osm/data"}
 echo PBF=${PBF:=$DATADIR/$(echo $REGION | grep -o '[^/]*$')-latest.osm.pbf}
 HOST=download.geofabrik.de
 
-if psql --no-password -h $PG_PORT_5432_TCP_ADDR -U $PG_ENV_POSTGRES_USER $PG_ENV_POSTGRES_DB -c "select * from planet_osm_replication_status;"; then
+if psql --no-password -h $PG_PORT_5432_TCP_ADDR -U $PG_ENV_POSTGRES_USER $PG_ENV_POSTGRES_DB -c "select * from osm2pgsql_properties;"; then
     echo "Updating."
     osm2pgsql-replication update \
         -v \
@@ -38,13 +38,13 @@ else
         --style /user/local/bin/custom.style \
         --host $PG_PORT_5432_TCP_ADDR \
         --database $PG_ENV_POSTGRES_DB \
-        --username $PG_ENV_POSTGRES_USER \
+        --user $PG_ENV_POSTGRES_USER \
         --port $PG_PORT_5432_TCP_PORT \
         $PBF
 
     osm2pgsql-replication init \
         --host $PG_PORT_5432_TCP_ADDR \
         --database $PG_ENV_POSTGRES_DB \
-        --username $PG_ENV_POSTGRES_USER \
+        --user $PG_ENV_POSTGRES_USER \
         --port $PG_PORT_5432_TCP_PORT --osm-file $PBF
 fi

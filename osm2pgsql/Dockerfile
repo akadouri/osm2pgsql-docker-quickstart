@@ -1,12 +1,11 @@
-FROM debian:bookworm-slim
+FROM debian:bookworm-backports
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update 
 RUN apt-get install -y \
-        osm2pgsql \
+        osm2pgsql/bookworm-backports \
         postgresql-client-15 \
         osmctools
-
 # clean up
 RUN apt-get clean \
         && rm -rf /var/lib/apt/lists/*
