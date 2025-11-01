@@ -7,7 +7,7 @@ This is a simple docker-compose.yml setup using [osm2pgsql](https://github.com/o
 This project started with a fork from [OsmHackTW/osm2pgsql-docker](https://github.com/OsmHackTW/osm2pgsql-docker).
 
 At SOTM2022 I learned osm2pgsql is already packaged... so now this container
-uses `debian:bookworm-backports` and `apt-get install -y osm2pgsql/bookworm-backports`!
+uses `debian:trixie-backports` and `apt-get install -y osm2pgsql/trixie-backports`!
 
 # Usage
 

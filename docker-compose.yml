@@ -1,4 +1,3 @@
-version: '3'
 services:
   osm2pgsql:
     build:
@@ -18,7 +17,7 @@ services:
     restart: on-failure:2
     volumes:
       # Specify local directory with .pbf file
-      - /your/local/path:/osm/data
+      - ./data:/osm/data
 
   postgres:
     image: postgis/postgis
@@ -38,7 +37,7 @@ services:
       - "-c"
       - "checkpoint_timeout=60min"
       - "-c"
-      - "max_wal_size=4GB"
+      - "max_wal_size=8GB"
       - "-c"
       - "checkpoint_completion_target=0.9"
       - "-c"

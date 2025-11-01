@@ -1,10 +1,10 @@
-FROM debian:bookworm-backports
+FROM debian:trixie-backports
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update 
 RUN apt-get install -y \
-        osm2pgsql/bookworm-backports \
-        postgresql-client-15 \
+        osm2pgsql/trixie-backports \
+        postgresql-client-17 \
         osmctools
 # clean up
 RUN apt-get clean \
